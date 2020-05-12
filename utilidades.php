@@ -1,28 +1,44 @@
 <?php
 require_once("db.php");
 
-function FotosRestaurantes($id){
-  $Query ="select * from restaurante_fotos where Estado = 'Activo' and RestauranteId = $id";
-  $Respuesta = ObtenerRegistros($Query);
-  return ConvertirUTF8($Respuesta);
-}
+// function FotosRestaurantes($id){
+//   $Query ="select * from restaurante_fotos where Estado = 'Activo' and RestauranteId = $id";
+//   $Respuesta = ObtenerRegistros($Query);
+//   return ConvertirUTF8($Respuesta);
+// }
 
-function TodoslosRestaurantes(){
-    $Query = "select * from restaurante";
-    $Respuesta = ObtenerRegistros($Query);
-    //  print_r($Respuesta);
-    return ConvertirUTF8($Respuesta);
-}
+// function TodoslosRestaurantes(){
+//     $Query = "select * from restaurante";
+//     $Respuesta = ObtenerRegistros($Query);
+//     //  print_r($Respuesta);
+//     return ConvertirUTF8($Respuesta);
+// }
+
+// function ProductoPorID($id){
+//     $Query = "select * from restaurante where RestauranteId = $id";
+//     $Respuesta = ObtenerRegistros($Query);
+//     //  print_r($Respuesta);
+//     return ConvertirUTF8($Respuesta);
+// }
+
+// function CrearRestaurante($array){
+
+//             $Nombre = $array[0]['RestauranteNombre'];
+//             $Logo =$array[0]['RestauranteLogo']; ;
+//             $Descripcion =$array[0]['RestauranteDescripcion']; ;
+
+
+//             $query = "insert into restaurante(RestauranteNombre,RestauranteLogo,RestauranteDescripcion)
+//             values('$Nombre','$Logo','$Descripcion')";
+//             $respuesta = NonQuery($query);
+
+//             //print_r($query);
+
+//             return true;
+// }
+
 function Todoslosconciertos(){
     $Query = "select * from conciertos";
-    $Respuesta = ObtenerRegistros($Query);
-    //  print_r($Respuesta);
-    return ConvertirUTF8($Respuesta);
-}
-
-
-function ProductoPorID($id){
-    $Query = "select * from restaurante where RestauranteId = $id";
     $Respuesta = ObtenerRegistros($Query);
     //  print_r($Respuesta);
     return ConvertirUTF8($Respuesta);
@@ -41,83 +57,41 @@ function ArtistasPorID($id){
     return ConvertirUTF8($Respuesta);
 }
 
-function CrearRestaurante($array){
+function Comprar($id,$nombre,$modalidades,$direccion,$tarjeta,$codigo,$precio,$cantidad){
+    $query="insert into compras(id,nombre,modalidades,direccion,tarjeta,codigo,precio)
+    values (0,'$nombre','$modalidades','$direccion','$tarjeta','$codigo','$precio')";
+    $respuesta = NonQuery($query);
 
-            $Nombre = $array[0]['RestauranteNombre'];
-            $Logo =$array[0]['RestauranteLogo']; ;
-            $Descripcion =$array[0]['RestauranteDescripcion']; ;
-
-
-            $query = "insert into restaurante(RestauranteNombre,RestauranteLogo,RestauranteDescripcion)
-            values('$Nombre','$Logo','$Descripcion')";
-            $respuesta = NonQuery($query);
-
-            //print_r($query);
-
-            return true;
+    $sql_update="update conciertos set tickets = tickets-$cantidad WHERE id=$id ";
+    $respuesta1 = NonQuery($sql_update);
+    return true;         
 }
 
-function Comprar($id,$nombre,$modalidades,$direccion,$tarjeta,$codigo,$precio,$cantidad,$conn){
-    $sql_insert="INSERT INTO compras(id,nombre,modalidades,direccion,tarjeta,codigo,precio)
-                VALUES (0,'$nombre','$modalidades','$direccion','$tarjeta','$codigo','$precio')";
-    
-    $sql_update="UPDATE conciertos set tickets = tickets-$cantidad WHERE id=$id ";
-
-                if (mysqli_query($conn,$sql_insert)) {
-
-                    //echo 'bien sapo loco';
-                     if (mysqli_query($conn,$sql_update)) {
-                        echo 'bien sapo loco';
-                      }
-                }
-                else{
-                    echo 'no funca';
-                }
-
+function TodoslosUsuarios(){
+    $Query = "select * from fly_users";
+    $Respuesta = ObtenerRegistros_fly($Query);
+    //  print_r($Respuesta);
+    return ConvertirUTF8_fly($Respuesta);
 }
 
-// function CrearCompra($nombre_s,$modalidad_s,$direccion_s,$codigo_s,$tarjeta_s,$precio_s){
+function UsuarioPorID($id){
+    $Query = "select * from fly_users where Id = $id";
+    $Respuesta = ObtenerRegistros_fly($Query);
+    //  print_r($Respuesta);
+    return ConvertirUTF8_fly($Respuesta);
+}
 
+function Registrar($id,$nombre,$apellido,$mail,$password,$creation_Date,$remove_Date,$id_estado,$id_User_Type){
+    echo $id_User_Type;
+    $query="insert into fly_users(Id,Name,LastName,Mail,Password,Creation_Date,Remove_Date,Id_State,Id_User_Type)
+    values (0,'$nombre','$apellido','$mail','$password','$creation_Date','$remove_Date','$id_estado','$id_User_Type')";
+    $respuesta = NonQuery_fly($query);
+    return true;         
+}
 
-
-//             $nombre_s=$nombre_s;
-//             $modalidad_s=$modalidad_s;
-//             $direccion_s=$direccion_s;
-//             $codigo_s=$codigo_s;
-//             $tarjeta_s=$tarjeta_s;
-//             $precio_s=$precio_s;
-
-
-//                             echo $nombre_s;
-//                 echo $modalidad_s;
-//                 echo $direccion_s;
-//                 echo $codigo_s;
-//                 echo $tarjeta_s;
-//                 echo $precio_s;
-
-//             $sql_insert="INSERT INTO compras(id,nombre,modalidades,direccion,tarjeta,codigo,anno_ex,precio)
-//                 VALUES (0,'$nombre_s','$modalidad_s','$direccion_s','$tarjeta_s','$codigo_s','$precio_s')";
-//             $respuesta = NonQuery($sql_insert);
-            
-//             if (mysqli_query($conexion,$sql_insert)) {
-
-//                     //echo 'bien sapo loco';
-//                     // if (mysqli_query($conn,$sql_update)) {
-//                         echo 'bien sapo loco';
-//                     // }
-//                 }
-//                 else{
-//                     echo 'no funca';
-//                 }
-//             //print_r($query);
-
-//             return true;
-
-
-
-
-// }
-
-
+function Loguear($mail,$password){
+    $query = "select * from fly_users where Password='$password' and Mail='$mail' ";
+    Validar($query,$mail,$password);
+}
 
 ?>
