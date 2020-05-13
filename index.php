@@ -1,16 +1,11 @@
 <?php
-
 header("Access-Control-Allow-Origin: *");
-
 //header('Content-Type: application/json');
-
 require_once('utilidades.php');
-
     //$token="123";
     //$name="";
 if(isset($_GET['url']))
 {
-
             $var = $_GET['url'];
             if($_SERVER['REQUEST_METHOD']=='GET')
             {
@@ -67,12 +62,9 @@ if(isset($_GET['url']))
 }else{ 
     
     if($_SERVER['REQUEST_METHOD']=='POST')
-    {
-                 
-                
+    {                              
         if(isset($_POST['ClaveCompra']))
-        {
-            
+        {        
                 $nombre_s=$_POST['nombre_s'];
                 $modalidad_s=$_POST['modalidad_s'];
                 $direccion_s=$_POST['direccion_s'];
@@ -86,7 +78,6 @@ if(isset($_GET['url']))
         }
         else if(isset($_POST['ClaveRegistro']))
         {
-
                 $nombre=$_POST['Name']; 
                 $apellido=$_POST['LastName']; 
                 $id_estado=$_POST['Id_State']; 
@@ -102,42 +93,27 @@ if(isset($_GET['url']))
         }
         else if(isset($_POST['ClaveLogueo']))
         {
-
                 $mail=$_POST['Mail']; 
                 $password=$_POST['Password']; 
                 
-                Loguear($mail,$password);
+                $res=Loguear($mail,$password);                
+                print_r(json_encode($res));
+                http_response_code(200);
         }
-    
-                
+        else{
+
+                $Respuesta = '{"Error":"No existe clave de metodo" ,
+                               "Estado": "No vas a entrar intruso"}' ; 
+                $obj = json_decode($Respuesta);
+                $convert=ConvertirUTF8_fly($obj); 
+                print_r(json_encode($convert));
+                http_response_code(405);
+        }              
     }
     else{
             http_response_code(405);
-        }
-    
+        }  
 ?>
-
-<html>
-<head>
-    <title>WEB SERVICE (WS)</title>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <br>
-    <center><h1><code>Bienvenido a mi WS</code></h1></center>
-    <br>
-    <center><div>
-        <h2 style="color: blue;"><code>Method GET</code></h2>
-        <h3><code>Method GET: http://localhost:8080/Api/artistas/(id)</code></h3>
-        <h3><code>Method GET: http://localhost:8080/Api/conciertos</code></h3>
-        <h3><code>Method GET: http://localhost:8080/Api/conciertos/(id)</code></h3>
-        <h2 style="color:green;"><code>Method POST</code></h2>
-        <h3><code>Method POST: Insert</code></h3>
-        <h3><code>Method POST: Update</code></h3>
-    </div></center>
-</body>
-</html>
-
 <?php
 }
 ?>

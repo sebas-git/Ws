@@ -97,8 +97,19 @@ function Registrar($id,$nombre,$apellido,$mail,$password,$creation_Date,$remove_
 }
 
 function Loguear($mail,$password){
-    $query = "select * from fly_users where Password='$password' and Mail='$mail' ";
-    Validar($query,$mail,$password);
+    $Query = "select * from fly_users where Password='$password' and Mail='$mail' ";
+    
+    $verif=Validar($Query,$mail,$password);
+    if($verif=="si"){
+        $Respuesta = ObtenerRegistros_fly($Query);
+        return ConvertirUTF8_fly($Respuesta);
+    }else{
+        $Respuesta = '{"Error":"Usuario incorrecto" ,
+                       "Estado": "No vas a entrar"}' ;  
+        $obj = json_decode($Respuesta);
+        return ConvertirUTF8_fly($obj);
+    }
+    
 }
 
 ?>

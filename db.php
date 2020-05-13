@@ -70,29 +70,6 @@ function ObtenerRegistros_fly($sqlstr_fly , &$conexion_fly = null){
     return $resultArray;
  }
 
- function Validar($sqlstr_fly,$mail,$password,&$conexion_fly = null){
-    
-    if(!$conexion_fly)global $conexion_fly;
-    $result = $conexion_fly->query($sqlstr_fly);  
-        while($row = $result->fetch_array()) {
-            $userok = $row["Mail"];
-            $passok = $row["Password"];
-        }
-    if(isset($userok)){
-        if($mail==$userok && $password==$passok){
-            
-            echo "ok"; 
-            
-        }
-    }
-    else{
-        echo "porsapo";
-         
-    }
-    
-
- }
-
 //utf-8 (Prueba)
 function ConvertirUTF8($array){
 
@@ -114,5 +91,29 @@ function ConvertirUTF8_fly($array){
     });
     return  $array;
 }
+
+//Validar login (App)
+
+function Validar($sqlstr_fly,$mail,$password,&$conexion_fly = null){
+    
+    if(!$conexion_fly)global $conexion_fly;
+    $result = $conexion_fly->query($sqlstr_fly);  
+        while($row = $result->fetch_array()) 
+            {
+                $e_mail = $row["Mail"];
+                $p_ass = $row["Password"];
+            }
+        if(isset($e_mail))
+            {
+                if($mail==$e_mail && $password==$p_ass){          
+                    echo "ok"; 
+                    return "si";
+                }
+            }
+        else{
+                echo "not";
+                return "no";    
+            }
+ }
 
 ?>
