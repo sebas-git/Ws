@@ -4,13 +4,13 @@
 /* El Scrip para genera la base de datos se encuentas en la carpeta base_de_datos la cual se encuentras adjuntada en este proyecto */ 
 
 //Parrametros Base Prueba 
-$server = "127.0.0.1";
+$server = "localhost";
 $user = "root";
 $pswd = "";
 $database = "restaurantes" ; 
 $port = "3306";
 //Parrametros Base App 
-$server_fly = "127.0.0.1";
+$server_fly = "localhost";
 $user_fly = "root";
 $pswd_fly = "";
 $database_fly = "fly_db_mod" ; 

@@ -28,6 +28,12 @@ if(isset($_GET['url']))
                                 http_response_code(200);
                         break;
 
+                        case "artistas";
+                                $resp = TodoslosArtistas();
+                                print_r(json_encode($resp) );
+                                http_response_code(200);
+                        break;
+
                         case "usuarios";
                                 $resp = TodoslosUsuarios();
                                 print_r(json_encode($resp) );

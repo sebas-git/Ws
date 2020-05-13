@@ -44,6 +44,13 @@ function Todoslosconciertos(){
     return ConvertirUTF8($Respuesta);
 }
 
+function TodoslosArtistas(){
+    $Query = "select * from artistas";
+    $Respuesta = ObtenerRegistros($Query);
+    //  print_r($Respuesta);
+    return ConvertirUTF8($Respuesta);
+}
+
 function ConciertoPorID($id){
     $Query = "select * from conciertos where id = $id";
     $Respuesta = ObtenerRegistros($Query);
