@@ -4,20 +4,76 @@ header("Access-Control-Allow-Origin: *");
 require_once('utilidades.php');
     //$token="123";
     //$name="";
-if(isset($_GET['url']))
-{
-            $var = $_GET['url'];
-            if($_SERVER['REQUEST_METHOD']=='GET')
+if(isset($_GET['url']))           
+{           
+        $var = $_GET['url'];
+
+        if($_SERVER['REQUEST_METHOD']=='GET')
             {
-                // $data = json_decode(file_get_contents($var));
                 $numero = intval(preg_replace('/[^0-9]+/','',$var),10);
-                //$numero=$data->name;
-                //$numero = $_GET["name"];            
-                //$token_recibido =$_GET["token"];
-                //if($token==$token_recibido){
-                    switch($var)
+
+                if(isset($_GET['TokenConcierto'])){
+
+                        $ClaveConcierto=$_GET['TokenConcierto'];
+                        $token= $var.$ClaveConcierto;
+                        $token1=true;
+                        $token2=false;
+                        $token3=false;
+                        $token4=false;
+                        $ClaveUsuarioId="";
+                        $ClaveUsuarios="";
+                        $ClaveConciertoId="";           
+                }   
+                else if(isset($_GET['TokenConciertoId'])){
+                        
+                        $ClaveConciertoId=$_GET['TokenConciertoId'];
+                        $token= $var.$ClaveConciertoId;
+                        $token2=true;
+                        $token1=false;
+                        $token3=false;
+                        $token4=false;
+                        $ClaveUsuarioId="";
+                        $ClaveConcierto="";
+                        $ClaveUsuarios="";                                               
+                }
+                else if(isset($_GET['TokenUsuarios'])){
+
+                        $ClaveUsuarios=$_GET['TokenUsuarios'];
+                        $token= $var.$ClaveUsuarios;
+                        $token3=true;
+                        $token1=false;
+                        $token2=false;
+                        $token4=false;
+                        $ClaveConcierto="";
+                        $ClaveUsuarioId="";
+                        $ClaveConciertoId="";                                                          
+                }
+                else if(isset($_GET['TokenUsuarioId'])){
+                        
+                        $ClaveUsuarioId=$_GET['TokenUsuarioId'];
+                        $token= $var.$ClaveUsuarioId;
+                        $token4=true;
+                        $token1=false;
+                        $token2=false;
+                        $token3=false;
+                        $ClaveUsuarios="";
+                        $ClaveConcierto="";
+                        $ClaveConciertoId="";                                                   
+                }
+                else{
+                        $token=false;
+                        $token1=false;
+                        $token2=false;
+                        $token3=false;
+                        $token4=false;
+                }
+            
+                if($token1==true || $token2==true || $token3==true || $token4==true){ 
+                        
+                    switch($token)
                     {   
-                        case "conciertos";
+                        
+                        case "conciertos".$ClaveConcierto;
                                 $resp = Todoslosconciertos();
                                 print_r(json_encode($resp) );
                                 http_response_code(200);
@@ -29,19 +85,19 @@ if(isset($_GET['url']))
                                 http_response_code(200);
                         break;
 
-                        case "usuarios";
+                        case "usuarios".$ClaveUsuarios;
                                 $resp = TodoslosUsuarios();
                                 print_r(json_encode($resp) );
                                 http_response_code(200);
                         break;
 
-                        case "usuarios/$numero";
+                        case "usuarios/$numero".$ClaveUsuarioId;
                                 $resp = UsuarioPorID($numero);
                                 print_r(json_encode($resp) );
                                 http_response_code(200);
                         break;
                        
-                        case "conciertos/$numero";
+                        case "conciertos/$numero".$ClaveConciertoId;
                                 $resp = ConciertoPorID($numero);
                                 print_r(json_encode($resp) );
                                 http_response_code(200);
@@ -55,10 +111,12 @@ if(isset($_GET['url']))
 
                         default;
                     }
-               // }
-            }else{
-                http_response_code(405);
-            }
+                }
+        }
+        else
+        {
+           http_response_code(405);
+        }
 }else{ 
     
     if($_SERVER['REQUEST_METHOD']=='POST')
