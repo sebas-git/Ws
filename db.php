@@ -4,11 +4,11 @@
 /* El Scrip para genera la base de datos se encuentas en la carpeta base_de_datos la cual se encuentras adjuntada en este proyecto */ 
 
 //Parrametros Base Prueba 
-$server = "localhost";
-$user = "root";
-$pswd = "";
-$database = "restaurantes" ; 
-$port = "3306";
+// $server = "localhost";
+// $user = "root";
+// $pswd = "";
+// $database = "restaurantes" ; 
+// $port = "3306";
 //Parrametros Base App 
 $server_fly = "localhost";
 $user_fly = "root";
@@ -19,10 +19,10 @@ $port_fly = "3306";
 
 //String de conexion Prueba 
 
-$conexion =  new mysqli($server,$user,$pswd,$database,$port);
-if( $conexion -> connect_errno){
-    die($conexion -> connect_error);
-}
+// $conexion =  new mysqli($server,$user,$pswd,$database,$port);
+// if( $conexion -> connect_errno){
+//     die($conexion -> connect_error);
+// }
 
 //String de conexion App
 
@@ -32,12 +32,12 @@ if( $conexion_fly -> connect_errno){
 }
 
 //guardar , modificar , eliminar (Prueba)
- function NonQuery($sqlstr , &$conexion = null){
-    if(!$conexion)global $conexion;
-    $result = $conexion->query($sqlstr);
-    return $conexion -> affected_rows;
+//  function NonQuery($sqlstr , &$conexion = null){
+//     if(!$conexion)global $conexion;
+//     $result = $conexion->query($sqlstr);
+//     return $conexion -> affected_rows;
 
- }
+//  }
 
  //guardar , modificar , eliminar (App)
  function NonQuery_fly($sqlstr_fly , &$conexion_fly = null){
@@ -48,15 +48,15 @@ if( $conexion_fly -> connect_errno){
  }
 
 //select (Prueba)
-function ObtenerRegistros($sqlstr , &$conexion = null){
-    if(!$conexion)global $conexion;
-    $result = $conexion->query($sqlstr);
-    $resultArray  = array();
-    foreach( $result  as $registros ){
-        $resultArray[] = $registros;
-    }
-    return $resultArray;
- }
+// function ObtenerRegistros($sqlstr , &$conexion = null){
+//     if(!$conexion)global $conexion;
+//     $result = $conexion->query($sqlstr);
+//     $resultArray  = array();
+//     foreach( $result  as $registros ){
+//         $resultArray[] = $registros;
+//     }
+//     return $resultArray;
+//  }
 
  //select (App)
 function ObtenerRegistros_fly($sqlstr_fly , &$conexion_fly = null){
@@ -71,15 +71,15 @@ function ObtenerRegistros_fly($sqlstr_fly , &$conexion_fly = null){
  }
 
 //utf-8 (Prueba)
-function ConvertirUTF8($array){
+// function ConvertirUTF8($array){
 
-        array_walk_recursive($array,function(&$item,$key){
-            if(!mb_detect_encoding($item,'utf-8', true)){
-                $item = utf8_encode( $item);
-            }
-        });
-        return  $array;
-}
+//         array_walk_recursive($array,function(&$item,$key){
+//             if(!mb_detect_encoding($item,'utf-8', true)){
+//                 $item = utf8_encode( $item);
+//             }
+//         });
+//         return  $array;
+// }
 
 //utf-8 (App)
 function ConvertirUTF8_fly($array){
