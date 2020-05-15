@@ -175,22 +175,48 @@
 ?>
 <html>
 <head>
-    <title>WEB SERVICE (WS)</title>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+<style>
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+}
+</style>
+
+        <title>WEB SERVICE (WS)</title>
+        <link rel="shortcut icon" href="logo.ico">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+       
+
 </head>
 <body>
     <br>
-    <center><h1><code>Bienvenido a mi WS</code></h1></center>
+    <!-- <center><h1><code  style="color: orange;">Bienvenido a mi WS</code></h1></center> -->
     <br>
-    <center><div>
-        <h2 style="color: blue;"><code>Method GET</code></h2>
-        <h3><code>Method GET: http://localhost:8080/Api/artistas/(id)</code></h3>
-        <h3><code>Method GET: http://localhost:8080/Api/conciertos</code></h3>
-        <h3><code>Method GET: http://localhost:8080/Api/conciertos/(id)</code></h3>
-        <h2 style="color:green;"><code>Method POST</code></h2>
-        <h3><code>Method POST: Insert</code></h3>
-        <h3><code>Method POST: Update</code></h3>
-    </div></center>
+    
+
+    <div class="container">
+        <div class="row">
+                <div style="border-style: none; margin:auto; margin-top:70px" class="col col-md-6 col-sm-auto ">
+                        <img class="img-responsive"   src="LogoPng.png">
+                </div>
+        
+                <div style="border-style: none; margin:auto; margin-top:120px " class="col col-sm-auto col-md-auto">
+                
+                        <h2 ><code style="color: blue; margin-top: 20px">Method GET</code></h2>
+                        <h3><code  style="color: black; font-size:15px">Method GET: http://localhost:80/Api/artistas/(id)</code></h3>
+                        <h3><code style="color: black;font-size:15px">Method GET: http://localhost:80/Api/conciertos</code></h3>
+                        <h3><code style="color: black;font-size:15px">Method GET: http://localhost:80/Api/conciertos/(id)</code></h3>
+                        <h2><code  style="color:green;">Method POST</code></h2>
+                        <h3><code style="color: black;font-size:15px">Method POST: Insert</code></h3>
+                        <h3><code style="color: black;font-size:15px">Method POST: Update</code></h3><br/>
+                        <button class="btn btn-success">Consume !!</button>
+                
+                </div>
+                
+        </div>
+    </div>
+
+    
 </body>
 </html>
 <?php
